@@ -1,0 +1,80 @@
+<div class="admin_panel">
+    <h3>Add a Flight</h3>
+    <table>
+        <tr>
+            <td><input type="text" [(ngModel)]="origin" placeholder="Origin"></td>
+            <td><input type="text" [(ngModel)]="destination" placeholder="Destination"></td>
+        </tr>
+        <tr>
+            <td><input type="number" [(ngModel)]="flightnumber" placeholder="Flight number"></td>
+            <td>
+                <select [(ngModel)]="airlineid">
+                    <option selected value="0">-- Airline --</option>
+                    <option *ngFor ="let result of filteredAirlinesList; let i=index" value="{{result.id}}" type="number">{{result.name}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Depart time:</label>   
+                <input type="date" [(ngModel)]="depart">
+            </td>
+            <td>
+                <label>Arrive time:</label>
+                <input type="date" [(ngModel)]="arrive">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Nonstop:</label>   
+                <input class="non_stop_box" type="checkbox" (click)="toggleNonStop()">
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button (click)="sendFlight()">Create flight</button></td>
+            <td></td>
+        </tr>
+    </table>   
+</div>
+
+<div class="notice-panel" *ngIf="loading">
+    LOADING FLIGHTS, PLEASE WAIT
+</div>
+
+<div class="editPanel">
+    <table class="flightTable">
+        <tr class="tbHeader">
+            <td>Origin</td>
+            <td>Destination</td>
+            <td>Flight #</td>
+            <td>Airline</td>
+            <td>Depart</td>
+            <td>Arrive</td>
+            <td>Nonstop</td>
+            <td>Update</td>
+            <td>Delete</td>
+        </tr>
+        <tr *ngFor="let flight of flightList; let i=index">
+            <td><input [(ngModel)]="flight.origin"></td>
+            <td><input [(ngModel)]="flight.destination"></td>
+            <td><input type="number" [(ngModel)]="flight.flightnumber"></td>
+            <td>
+                <select [(ngModel)]="flight.airlinesId">
+                    <!-- <option value="" disabled selected>{{flight.airlines.id}}</option> -->
+                    <option *ngFor ="let result of filteredAirlinesList; let i=index" value="{{result.id}}" type="number" [selected]="result.id==flight.airlinesId">{{result.name}}</option>
+                </select>
+            </td>
+            <td>{{flight.depart | date : 'shortDate'}}</td>
+            <td>{{flight.arrive | date : 'shortDate'}}</td>
+            <td>{{flight.nonstop}}</td>
+            <td><button class="update" (click)="update(flight)">Go</button></td>
+            <td><button class="delete" (click)="delete(flight)">Go</button></td>
+        </tr>
+    </table>
+</div>
+

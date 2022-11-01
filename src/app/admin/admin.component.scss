@@ -1,0 +1,89 @@
+input, select {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 2em;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.admin_panel {
+    margin: 10px auto;
+    // background-color:white;
+    background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8));
+    border: 0px solid grey;
+    box-shadow: 2px 2px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+    table { width: 30%; }
+    table td { display: table-cell; }
+
+    width: 90%;
+    padding: 20px;
+    border-radius: 5px;
+    
+    .required { border-color: red; }
+    button{ background-color: #415D65;
+        width: 140px;
+        color: white;
+        font-size: 1em;
+        height: 30px;
+    }
+
+
+    
+    .non_stop_box{ width: auto; height: auto; }
+}
+
+.editPanel, .notice-panel {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px auto;
+    background-color: rgb(249, 247, 247);
+    background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8));
+    border: 0px solid grey;
+    box-shadow: 2px 2px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+    width: 90%;
+    padding:20px;
+    
+    @media screen and (max-width: 500px){
+        width: 90%;
+    }
+    border-radius: 5px;
+
+    .flightTable{
+        display: table;
+        font-size: 1em;
+        @media screen and (max-width: 719px){
+            input{max-width: 50px};
+          }
+        @media screen and (max-width: 500px){
+          input{max-width: 25px};
+        }
+        .tbHeader { font-weight: bold; }
+    }
+
+    .flightTable tr { display: table-row; }
+    .flightTable td { display: table-cell; }
+
+    button { width: 40px; height: 24px; }
+    button.update{
+        background-color: rgb(207, 194, 16);
+    }
+
+    button.delete{
+        background-color: rgb(224, 11, 11);
+    }
+
+}
+
+.notice-panel {
+    background-color: white;
+    color: red;
+}
