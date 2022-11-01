@@ -10,16 +10,26 @@ import { FlightsService } from '../flights.service';
 export class AdminComponent implements OnInit {
   loading = true;
 
-  origin: string; 
-  destination: string; 
-  flightnumber: number; 
-  airlineid: number=0;
-  selectedAirline: string = "";
-  depart: Date; 
-  arrive: Date; 
-  nonstop: boolean;
+  // origin: string; 
+  // destination: string; 
+  // flightnumber: number; 
+  // airlineid: number=0;
+  //depart: Date; 
+  //arrive: Date; 
+  //nonstop: boolean;
+  
   flightList: Flight[];
   filteredAirlinesList: any[];
+
+  newFlight: Flight = {
+    origin: null,
+    destination: null,
+    flightnumber: null,
+    depart: null, 
+    arrive: null, 
+    nonstop: false,
+    airlinesId: null
+  };
 
 
   constructor(private flightService: FlightsService) { }
@@ -27,7 +37,6 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.refresh();
   }
-
 
   refresh(){
     this.loading = true;
@@ -37,16 +46,28 @@ export class AdminComponent implements OnInit {
     })
 
     this.flightService.getAllAirlines().subscribe(data =>{
-      this.filteredAirlinesList = data; 
+      this.filteredAirlinesList = data;
     })
+
+    this.resetNewFlight();
   }
 
-  toggleNonStop(): void {
-    this.nonstop = !this.nonstop;
+  resetNewFlight(){
+    this.newFlight.origin = null;
+    this.newFlight.destination = null;
+    this.newFlight.flightnumber = null;
+    this.newFlight.depart = null;
+    this.newFlight.arrive = null;
+    this.newFlight.nonstop = null;
+    this.newFlight.airlinesId = null;
   }
+
+  /* toggleNonStop(): void {
+    this.nonstop = !this.nonstop;
+  } */
 
   sendFlight(){
-    const flight: Flight = {
+    /* const flight: Flight = {
       origin: this.origin, 
       destination: this.destination,
       flightnumber: this.flightnumber,
@@ -54,9 +75,14 @@ export class AdminComponent implements OnInit {
       depart: this.depart,
       arrive: this.arrive,
       nonstop: this.nonstop
-    }
+    } */
 
-    this.flightService.postFlight(flight);
+    this.flightService.postFlight(this.newFlight).subscribe(data => {
+      console.log("data is ", data);
+      if(data){
+        this.refresh();
+      }
+    });
   }
 
   update(flight: Flight){

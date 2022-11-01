@@ -2,13 +2,13 @@
     <h3>Add a Flight</h3>
     <table>
         <tr>
-            <td><input type="text" [(ngModel)]="origin" placeholder="Origin"></td>
-            <td><input type="text" [(ngModel)]="destination" placeholder="Destination"></td>
+            <td><input type="text" [(ngModel)]="newFlight.origin" placeholder="Origin"></td>
+            <td><input type="text" [(ngModel)]="newFlight.destination" placeholder="Destination"></td>
         </tr>
         <tr>
-            <td><input type="number" [(ngModel)]="flightnumber" placeholder="Flight number"></td>
+            <td><input type="number" [(ngModel)]="newFlight.flightnumber" placeholder="Flight number"></td>
             <td>
-                <select [(ngModel)]="airlineid">
+                <select [(ngModel)]="newFlight.airlinesId">
                     <option selected value="0">-- Airline --</option>
                     <option *ngFor ="let result of filteredAirlinesList; let i=index" value="{{result.id}}" type="number">{{result.name}}</option>
                 </select>
@@ -17,17 +17,17 @@
         <tr>
             <td>
                 <label>Depart time:</label>   
-                <input type="date" [(ngModel)]="depart">
+                <input type="date" [(ngModel)]="newFlight.depart">
             </td>
             <td>
                 <label>Arrive time:</label>
-                <input type="date" [(ngModel)]="arrive">
+                <input type="date" [(ngModel)]="newFlight.arrive">
             </td>
         </tr>
         <tr>
             <td>
                 <label>Nonstop:</label>   
-                <input class="non_stop_box" type="checkbox" (click)="toggleNonStop()">
+                <input class="non_stop_box" type="checkbox" [(ngModel)]="newFlight.nonstop">
             </td>
             <td></td>
         </tr>
@@ -66,7 +66,9 @@
             <td>
                 <select [(ngModel)]="flight.airlinesId">
                     <!-- <option value="" disabled selected>{{flight.airlines.id}}</option> -->
-                    <option *ngFor ="let result of filteredAirlinesList; let i=index" value="{{result.id}}" type="number" [selected]="result.id==flight.airlinesId">{{result.name}}</option>
+                    <option *ngFor ="let result of filteredAirlinesList; let i=index" value="{{result.id}}" type="number" [selected]="result.id==flight.airlinesId">
+                        {{result.name}}
+                    </option>
                 </select>
             </td>
             <td>{{flight.depart | date : 'shortDate'}}</td>
