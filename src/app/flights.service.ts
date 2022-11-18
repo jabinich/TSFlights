@@ -48,7 +48,8 @@ export class FlightsService {
   }
 
   deleteFlight(id) {
-    return this.http.post(this.backendUrl + "/flights/" + id + "/delete", null);
+    //return this.http.post(this.backendUrl + "/flights/" + id + "/delete", null);
+    return this.http.delete(this.backendUrl + "/flights/" + id );
   }
 
 }
